@@ -5,7 +5,7 @@
 - Visual Studio.
 
 **Objetivos:**
-1. Utilizar métodos delegados y eventos para la optimización de la lógica ejecutada en el método Update de los scripts Door.cs y CameController.cs para mejorar su rendimiento.
+1. Utilizar métodos delegados y eventos para la optimización de la lógica ejecutada en el método Update de los scripts Door.cs y GameController.cs para mejorar su rendimiento.
 3. Estructurar y comentar el código correctamente.
 4. Compilar el proyecto de Unity para Windows.
 
