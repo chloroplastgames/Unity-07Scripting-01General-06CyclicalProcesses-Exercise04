@@ -1,19 +1,21 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class EndPoint : MonoBehaviour
 {
-    public bool IsEnter { get; private set; }
+    #region Delegates and Events
+    public delegate void FinishGame();
+    public static event FinishGame FinishTheGame;
+    #endregion
 
-    private void Start()
-    {
-        IsEnter = false;
-    }
+    private bool isEnter = false;
 
     private void OnTriggerEnter()
     {
-        IsEnter = true;
+        if (!isEnter)
+        {
+            FinishTheGame?.Invoke();
+            isEnter = true;
+        }
     }
 
 }

@@ -2,33 +2,24 @@
 
 public class Door : MonoBehaviour
 {
-    private bool _isOpen;
-
-    private Switcher _switcher;
-
-    private void Awake()
+    #region Unity Methods
+    private void OnEnable()
     {
-        _switcher = FindObjectOfType<Switcher>();
+        Switcher.OpenTheDoor += OpenDoor;
     }
 
-    void Start()
+    private void OnDisable()
     {
-        _isOpen = false;
+        Switcher.OpenTheDoor -= OpenDoor;
     }
+    #endregion
 
-    void Update()
-    {
-        if (_switcher.IsSwitched && !_isOpen)
-        {
-            OpenDoor();
 
-            _isOpen = true;
-        }
-    }
-
+    #region My Methods
     private void OpenDoor()
     {
         transform.position = new Vector3(transform.position.x, transform.position.y + 2.5f, transform.position.z);
     }
+    #endregion
 
 }
