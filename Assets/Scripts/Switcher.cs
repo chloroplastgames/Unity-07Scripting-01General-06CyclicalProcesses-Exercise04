@@ -2,15 +2,18 @@
 
 public class Switcher : MonoBehaviour
 {
-    public bool IsSwitched { get; private set; }
+    #region Delegates and Events
+    public delegate void OpenDoor();
+    public static event OpenDoor OpenTheDoor;
+    #endregion
 
-    private void Start()
-    {
-        IsSwitched = false;
-    }
-
+    private bool isSwitched = false;
     private void OnTriggerEnter()
     {
-        IsSwitched = true;
+        if (!isSwitched)
+        {
+            OpenTheDoor?.Invoke();
+            isSwitched = true;
+        }
     }
 }
