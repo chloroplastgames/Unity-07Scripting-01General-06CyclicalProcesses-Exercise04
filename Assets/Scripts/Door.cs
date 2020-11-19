@@ -2,29 +2,15 @@
 
 public class Door : MonoBehaviour
 {
-    private bool _isOpen;
 
-    private Switcher _switcher;
-
-    private void Awake()
+    private void OnEnable()
     {
-        _switcher = FindObjectOfType<Switcher>();
-    }
-
-    void Start()
+        Switcher.Execute += OpenDoor;
+    } 
+    private void OnDisable()
     {
-        _isOpen = false;
-    }
-
-    void Update()
-    {
-        if (_switcher.IsSwitched && !_isOpen)
-        {
-            OpenDoor();
-
-            _isOpen = true;
-        }
-    }
+        Switcher.Execute -= OpenDoor;
+    } 
 
     private void OpenDoor()
     {
