@@ -4,16 +4,15 @@ using UnityEngine;
 
 public class EndPoint : MonoBehaviour
 {
-    public bool IsEnter { get; private set; }
+    public delegate void OnEnter();
 
-    private void Start()
-    {
-        IsEnter = false;
-    }
+    public static OnEnter Execute;
 
     private void OnTriggerEnter()
     {
-        IsEnter = true;
+        if (Execute == null) return;
+
+        Execute.Invoke();
     }
 
 }

@@ -2,15 +2,14 @@
 
 public class Switcher : MonoBehaviour
 {
-    public bool IsSwitched { get; private set; }
+    public delegate void OnPress();
 
-    private void Start()
-    {
-        IsSwitched = false;
-    }
+    public static OnPress Execute; 
 
     private void OnTriggerEnter()
     {
-        IsSwitched = true;
+        if (Execute == null) return;
+
+        Execute.Invoke();
     }
 }
