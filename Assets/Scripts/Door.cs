@@ -2,8 +2,6 @@
 
 public class Door : MonoBehaviour
 {
-    private bool _isOpen;
-
     private Switcher _switcher;
 
     private void Awake()
@@ -11,24 +9,20 @@ public class Door : MonoBehaviour
         _switcher = FindObjectOfType<Switcher>();
     }
 
-    void Start()
+    private void OnEnable()
     {
-        _isOpen = false;
+        _switcher.OnTrigger += OpenDoor;
     }
 
-    void Update()
+    private void OnDisable()
     {
-        if (_switcher.IsSwitched && !_isOpen)
-        {
-            OpenDoor();
-
-            _isOpen = true;
-        }
+        _switcher.OnTrigger -= OpenDoor;
     }
+
 
     private void OpenDoor()
     {
         transform.position = new Vector3(transform.position.x, transform.position.y + 2.5f, transform.position.z);
+        _switcher.OnTrigger -= OpenDoor;
     }
-
 }
